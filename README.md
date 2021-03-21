@@ -1,5 +1,6 @@
 # Projet Web
 
+Réalisé par Filipe DOUTEL SILVA & Sörel NADAUD
 ## But du projet
 
 ## Architecture du projet
