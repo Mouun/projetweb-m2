@@ -1,0 +1,45 @@
+<div class="flex flex-grow justify-center items-center text-center py-5 md:py-10 px-6 lg:px-0">
+  <div class="max-w-lg w-full">
+    <h1>Connexion</h1>
+    <div class="flex flex-col">
+      <form [formGroup]="signInForm" (keydown.enter)="signIn()">
+        <div class="mb-4">
+          <app-custom-input
+            controlName="email"
+            label="Email"
+            [hasError]="getFormControl('email').invalid && !getFormControl('email').pristine"
+          >
+          </app-custom-input>
+          <app-custom-input-error *ngIf="getFormControl('email').errors?.required && !getFormControl('email').pristine">
+            Ce champ est requis
+          </app-custom-input-error>
+          <app-custom-input-error *ngIf="getFormControl('email').errors?.email && !getFormControl('email').pristine">
+            L'adresse email entrée n'est pas valide
+          </app-custom-input-error>
+        </div>
+        <div class="mb-12">
+          <app-custom-input
+            inputType="password"
+            controlName="password"
+            label="Mot de passe"
+            [hasError]="getFormControl('password').invalid && !getFormControl('password').pristine"
+          >
+          </app-custom-input>
+          <app-custom-input-error
+            *ngIf="getFormControl('password').errors?.required && !getFormControl('password').pristine">Ce champ est
+            requis
+          </app-custom-input-error>
+        </div>
+      </form>
+      <button appBaseButton class="mb-4 w-full" [isDisabled]="signInForm.invalid" [size]="buttonSize.lg"
+              (click)="signIn()">Se connecter
+      </button>
+      <span class="text-sm">
+        Pas encore inscrit ?
+        <a routerLink="/auth/signup">
+          M'inscrire
+        </a>
+      </span>
+    </div>
+  </div>
+</div>

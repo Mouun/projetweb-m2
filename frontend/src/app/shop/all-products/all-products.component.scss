@@ -1,0 +1,26 @@
+.filter-pills-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
+::ng-deep .custom-slider .ngx-slider .ngx-slider-bar {
+  background: lightgray;
+}
+::ng-deep .custom-slider .ngx-slider .ngx-slider-selection {
+  background: #6366F1;
+}
+::ng-deep .custom-slider .ngx-slider .ngx-slider-pointer {
+  background: #6366F1;
+  outline: none;
+}
+::ng-deep .custom-slider .ngx-slider .ngx-slider-pointer:after {
+  display: none;
+}
+
+::ng-deep .custom-slider .ngx-slider .ngx-slider-limit {
+  font-weight: bold;
+  color: black !important;
+}
+
+::ng-deep .custom-slider .ngx-slider .ngx-slider-bubble {
+  color: black !important;
+}

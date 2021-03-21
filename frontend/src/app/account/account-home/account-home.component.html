@@ -1,0 +1,22 @@
+<div class="flex flex-col flex-grow justify-center py-5 md:py-10 px-6 xl:px-0">
+  <!--Top text-->
+  <div class="flex justify-center mb-6">
+    <div class="w-full max-w-6xl">
+      <h1>Mon compte</h1>
+      <div class="w-full flex flex-wrap flex-row">
+        <div class="flex-1 mr-0 lg:mr-12 mb-6 lg:mb-0">
+          <div class="flex w-full py-4" *ngFor="let accountHomeSection of accountHomeSections">
+            <div class="w-24 flex justify-center mr-6">
+              <hero-icon [name]="accountHomeSection.icon" size="4rem" class="text-indigo-500"></hero-icon>
+            </div>
+            <div class="flex flex-col w-full">
+              <span class="font-bold text-lg">{{accountHomeSection.sectionTitle}}</span>
+              <span class="italic font-medium text-sm mb-3">{{accountHomeSection.sectionDescription}}</span>
+              <button appSecondaryButton class="max-w-xs" (click)="router.navigateByUrl('/account' + accountHomeSection.destination)">{{accountHomeSection.buttonLabel}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

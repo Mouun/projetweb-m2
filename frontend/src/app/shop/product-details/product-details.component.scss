@@ -1,0 +1,27 @@
+::ng-deep .swiper-square-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+::ng-deep .swiper-square-container:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+::ng-deep .swiper-button-prev {
+  color: white !important;
+}
+
+::ng-deep .swiper-button-next {
+  color: white !important;
+}
+
+::ng-deep .swiper-pagination > .swiper-pagination-handle > .swiper-pagination-bullet {
+  background-color: white;
+  border: none !important;
+  margin: 0 !important;
+  width: 16px;
+  height: 16px;
+}

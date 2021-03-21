@@ -1,0 +1,15 @@
+<button
+  class="flex w-full outline-none focus:outline-none px-2 py-4 sm:px-8 sm:py-4 font-bold text-lg hover:underline"
+  (click)="toggleCollapsible()"
+>
+  <span>{{filterName}}</span>
+  <span class="flex-grow"></span>
+  <hero-icon name="chevron-up" *ngIf="opened"></hero-icon>
+  <hero-icon name="chevron-down" *ngIf="!opened"></hero-icon>
+</button>
+<div
+  #content
+  class="max-h-0 overflow-hidden px-4 transform duration-150 ease-in-out"
+>
+  <ng-content></ng-content>
+</div>

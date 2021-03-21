@@ -1,0 +1,36 @@
+<div
+  class="flex flex-col bg-white rounded-lg transition duration-150 ease-in-out hover:shadow-focus product-card"
+>
+  <a [href]="getProductPageLink()" class="text-black hover:text-black">
+    <div class="overflow-hidden rounded-t-lg">
+      <img
+        [src]="product.images[0]"
+        class="w-full h-64 object-cover object-center rounded-t-lg bg-gray-200 cursor-pointer transition duration-150 ease-in-out"
+        alt="product-image"
+      />
+    </div>
+    <div class="flex flex-col px-4 py-4 text-left">
+      <p class="font-bold leading-relaxed text-sm truncate uppercase product-name hover:cursor-pointer text-indigo-500">
+        {{product.title}}
+      </p>
+      <p class="leading-relaxed text-sm truncate">{{product.description}}</p>
+      <div class="flex flex-row items-center mt-4">
+        <hero-icon name="lightning-bolt" size="1.25rem" class="mr-2 text-indigo-500"></hero-icon>
+        <p class="leading-relaxed text-sm text-black">{{product.horsepower}}cv</p>
+      </div>
+      <div class="flex flex-row items-center mt-4">
+        <hero-icon name="cog" size="1.25rem" class="mr-2 text-indigo-500"></hero-icon>
+        <p class="leading-relaxed text-sm">{{product.mileage}} km</p>
+      </div>
+      <div class="flex flex-row items-center mt-4">
+        <hero-icon name="fire" size="1.25rem" class="mr-2 text-indigo-500"></hero-icon>
+        <p class="leading-relaxed text-sm">{{product.fuel}}</p>
+      </div>
+      <div class="flex justify-end mt-2">
+        <p class="font-bold text-xl mb-2">{{product.price / 100}}<sup class="text-xs leading-none">€</sup>
+        </p>
+      </div>
+    </div>
+  </a>
+  <button appBaseButton (click)="goToPayment()" [size]="buttonSize.base">Acheter</button>
+</div>

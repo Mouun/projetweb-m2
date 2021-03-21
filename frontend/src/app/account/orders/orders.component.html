@@ -1,0 +1,53 @@
+<div class="flex flex-col flex-grow justify-center py-5 md:py-10 px-6 xl:px-0">
+  <div class="flex justify-center mb-6">
+    <div class="w-full max-w-6xl">
+      <div class="justify-start">
+        <button appSecondaryButton class="mb-5" [size]="buttonSize.lg" (click)="router.navigateByUrl('account')">
+          <hero-icon name="arrow-left" size="1rem" class="mr-1"></hero-icon>
+          Retour
+        </button>
+      </div>
+      <h1>Mes commandes</h1>
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="shadow overflow-hidden sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+              <tr>
+                <th>
+                  Date
+                </th>
+                <th>
+                  N° Commande
+                </th>
+                <th>
+                  Véhicule
+                </th>
+                <th>
+                  Somme payée
+                </th>
+              </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+              <tr *ngFor="let order of orders">
+                <td>
+                  {{order.orderPlacedDate | date}}
+                </td>
+                <td>
+                  {{order.id}}
+                </td>
+                <td>
+                  {{order.product.title}}
+                </td>
+                <td>
+                  {{order.product.price / 100}}€
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

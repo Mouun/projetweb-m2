@@ -1,0 +1,111 @@
+<div class="flex flex-col flex-grow justify-center py-5 md:py-10 px-6 xl:px-0">
+  <!--Top text-->
+  <div class="flex justify-center mb-6">
+    <div class="w-full max-w-6xl">
+      <h1>Bienvenue sur ProCar</h1>
+      <p class="leading-relaxed">
+        Bienvenue sur ce site réalisé dans le cadre d'un mini projet en <b>M2 INTENSE à la MIAGE de Sophia-Antipolis</b>.
+        Le site a été réalisé par <b>Filipe DOUTEL SILVA & Sörel NADAUD</b> et utilise Angular 11.
+      </p>
+      <br>
+      <p>Toutes les données visibles sur le site ont été récupérées sur le site
+        <a class="text-base" target="_blank" [href]="'https://benzin.fr/'">Benzin.fr</a>.
+      </p>
+    </div>
+  </div>
+
+  <!--Filters selection-->
+  <div class="flex justify-center mb-6 bg-white sticky top-navbar-height z-10">
+    <div
+      class="w-full max-w-6xl flex flex-row overflow-x-scroll filter-pills-inner-container p-2 border-b border-gray-200"
+    >
+      <app-filter-pill
+        *ngFor="let appliedFilter of appliedFilters"
+        [filterName]="appliedFilter.name"
+        [selected]="appliedFilter.activated"
+        (click)="openFiltersModal(appliedFilter)"
+      >
+      </app-filter-pill>
+    </div>
+  </div>
+
+  <!--Product display-->
+  <div
+    *ngIf="filteredProducts.length > 0"
+    class="flex justify-center items-center mb-6"
+  >
+    <div class="max-w-6xl flex flex-wrap -px-6 overflow-hidden md:-px-6 lg:-px-6 xl:-px-6">
+      <app-product-card
+        [product]="product"
+        *ngFor="let product of filteredProducts"
+        class="py-4 px-2 w-full overflow-hidden md:py-6 md:px-6 md:w-1/2 lg:py-6 lg:px-6 lg:w-1/3 xl:py-6 xl:px-6 xl:w-1/3"
+      >
+      </app-product-card>
+    </div>
+  </div>
+
+  <!--No product found block-->
+  <div
+    *ngIf="filteredProducts.length === 0"
+    class="flex justify-center items-center mb-6"
+  >
+    <div class="py-12">
+      <span class="font-bold font-xl">Aucun résultat, veuillez modifier vos critères de recherche.</span>
+    </div>
+  </div>
+
+  <!--Filters modal-->
+  <div
+    class="fixed top-0 flex flex-col w-full -right-96 sm:w-96 h-full bg-white shadow-2xl z-50"
+    [@openFiltersModalAnimation]="filtersModalState"
+  >
+    <!--Top part of the modal-->
+    <div class="flex py-4 px-4 sm:px-8 justify-end">
+      <button
+        class="outline-none focus:outline-none text-indigo-600 hover:text-indigo-700 duration-150 ease-in-out"
+        (click)="closeFiltersModal()"
+      >
+        <hero-icon name="x" size="1.5rem"></hero-icon>
+      </button>
+    </div>
+
+    <!--Form-->
+    <div class="flex-1 overflow-auto">
+      <form [formGroup]="filtersForm" class="px-4 sm:px-8">
+        <!--Searchbar filter-->
+        <div class="relative w-full mb-4 mt-1">
+          <app-custom-input controlName="keyword" placeholder="Rechercher" [rounded]="true"
+                            (whenKeyUp)="onSearchFieldValueChanged($event)"></app-custom-input>
+        </div>
+
+        <!--Collapsible filters-->
+        <div *ngFor="let appliedFilter of appliedFilters">
+          <app-filter-collapsible [id]="appliedFilter.collapsibleName" *ngIf="appliedFilter.templateName !== 'search'"
+                                  [filterName]="appliedFilter.collapsibleName">
+            <div class="custom-slider px-2 sm:px-10 py-8" *ngIf="appliedFilter.templateName != 'search'">
+              <ngx-slider
+                [options]="appliedFilter.sliderOptions"
+                [formControlName]="appliedFilter.templateName"
+                (userChangeEnd)="appliedFilter.sliderChangeHandle($event)"
+              >
+              </ngx-slider>
+            </div>
+          </app-filter-collapsible>
+        </div>
+      </form>
+    </div>
+
+    <!--Bottom part of the modal-->
+    <div class="w-full py-4 px-4 sm:px-8 text-xs sm:text-sm">
+      <button appBaseButton class="w-full" [size]="buttonSize.lg" (click)="closeFiltersModal()">Valider</button>
+    </div>
+  </div>
+
+  <!--Filters modal background-->
+  <div
+    class="fixed top-0 bottom-0 left-0 right-0 bg-black z-30 transform duration-150 ease-in-out"
+    [ngClass]="{'hidden opacity-0': !showFiltersModal, 'block opacity-50': showFiltersModal}"
+    (click)="closeFiltersModal()"
+  >
+  </div>
+</div>

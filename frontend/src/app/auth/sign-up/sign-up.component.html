@@ -1,0 +1,101 @@
+<div class="flex flex-grow justify-center items-center text-center py-5 md:py-10 px-6 lg:px-0">
+  <div class="max-w-lg w-full">
+    <h1>Inscription</h1>
+    <form [formGroup]="signUpForm" (keydown.enter)="signUp()">
+      <div class="flex flex-col">
+        <div class="flex mb-4">
+          <div class="w-full">
+            <app-custom-input
+              controlName="firstname"
+              label="Prénom"
+              [hasError]="getFormControl('firstname').invalid && !getFormControl('firstname').pristine"
+              class="w-full"
+            >
+            </app-custom-input>
+            <app-custom-input-error
+              *ngIf="getFormControl('firstname').errors?.required && !getFormControl('firstname').pristine">Ce champ est
+              requis
+            </app-custom-input-error>
+            <app-custom-input-error
+              *ngIf="getFormControl('firstname').errors?.minlength && !getFormControl('firstname').pristine">Le prénom
+              doit faire au moins 3 caractères
+            </app-custom-input-error>
+          </div>
+          <div class="w-6 sm:w-12"></div>
+          <div class="w-full">
+            <app-custom-input
+              controlName="lastname"
+              label="Nom"
+              [hasError]="getFormControl('lastname').invalid && !getFormControl('lastname').pristine"
+              class="w-full"
+            >
+            </app-custom-input>
+            <app-custom-input-error
+              *ngIf="getFormControl('lastname').errors?.required && !getFormControl('lastname').pristine">Ce champ est
+              requis
+            </app-custom-input-error>
+            <app-custom-input-error
+              *ngIf="getFormControl('lastname').errors?.minlength && !getFormControl('lastname').pristine">Le nom doit
+              faire au moins 3 caractères
+            </app-custom-input-error>
+          </div>
+        </div>
+        <div class="mb-4">
+          <app-custom-input
+            controlName="email"
+            label="Email"
+            [hasError]="getFormControl('email').invalid && !getFormControl('email').pristine"
+          >
+          </app-custom-input>
+          <app-custom-input-error *ngIf="getFormControl('email').errors?.required && !getFormControl('email').pristine">
+            Ce champ est requis
+          </app-custom-input-error>
+          <app-custom-input-error *ngIf="getFormControl('email').errors?.email && !getFormControl('email').pristine">
+            L'adresse email entrée n'est pas valide
+          </app-custom-input-error>
+        </div>
+        <div class="mb-4">
+          <app-custom-input
+            inputType="password"
+            controlName="password"
+            label="Mot de passe"
+            [hasError]="getFormControl('password').invalid && !getFormControl('password').pristine"
+          >
+          </app-custom-input>
+          <app-custom-input-error
+            *ngIf="getFormControl('password').errors?.required && !getFormControl('password').pristine">Ce champ
+            est requis
+          </app-custom-input-error>
+        </div>
+        <div class="mb-12">
+          <app-custom-input
+            inputType="password"
+            controlName="passwordConfirmation"
+            label="Confirmation du mot de passe"
+            [hasError]="getFormControl('passwordConfirmation').invalid && !getFormControl('passwordConfirmation').pristine"
+          >
+          </app-custom-input>
+          <app-custom-input-error
+            *ngIf="getFormControl('passwordConfirmation').errors?.required && !getFormControl('passwordConfirmation').pristine">
+            Ce champ est requis
+          </app-custom-input-error>
+          <app-custom-input-error
+            *ngIf="getFormControl('passwordConfirmation').errors?.mustMatch && !getFormControl('passwordConfirmation').pristine">
+            Les mots de passe ne correspondent pas
+          </app-custom-input-error>
+        </div>
+      </div>
+    </form>
+    <div class="flex flex-col">
+      <button appBaseButton class="mb-4 w-full" [isDisabled]="signUpForm.invalid" [size]="buttonSize.lg"
+              (click)="signUp()">S'inscrire
+      </button>
+      <span class="text-sm">
+      Déjà membre ?
+      <a routerLink="/auth/signin">
+        Me connecter
+      </a>
+    </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="border-b border-gray-200 h-16 px-6 py-4">
+  <div class="flex flex-row max-w-screen-xl mx-auto md:justify-between h-8">
+    <div class="flex flex-row flex-grow justify-between items-start">
+      <div class="mr-4 items-center flex">
+        <a [href]="''" class="font-semibold text-2xl text-indigo-500">ProCar</a>
+      </div>
+      <div *ngIf="tokenService.isAuthenticated()">
+        <div class="flex flex-grow"></div>
+        <div class="flex items-center">
+          <!--User options-->
+          <div (clickOutside)="dropdownOpened = false" class="relative flex mr-4">
+            <button
+              class="outline-none focus:outline-none"
+              (click)="dropdownOpened = !dropdownOpened"
+            >
+              <hero-icon
+                name="user-circle"
+                size="2rem"
+                class="text-indigo-500 hover:text-indigo-600"
+              >
+              </hero-icon>
+            </button>
+            <div
+              *ngIf="dropdownOpened"
+              class="origin-top-right absolute right-0 mt-10 w-56 rounded-md shadow-lg"
+              [@inOutAnimation]
+            >
+              <div class="rounded-md bg-white shadow-xs">
+                <div class="px-4 py-3">
+                  <p class="text-sm leading-5">
+                    Connecté(e) en tant que
+                  </p>
+                  <p class="text-sm leading-5 font-medium truncate">
+                    {{tokenService.getTokenProfile().email}}
+                  </p>
+                </div>
+                <div class="border-t border-gray-100"></div>
+                <div class="py-1">
+                <span
+                  (click)="goToProfile()"
+                  class="cursor-pointer group flex items-center px-4 py-2 text-sm leading-5 font-medium text-indigo-600 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none"
+                  role="menuitem"
+                >
+                  <hero-icon name="user-solid" size="1.25rem" class="mr-3"></hero-icon>
+                  Accéder à mon compte
+                </span>
+                </div>
+                <div class="border-t border-gray-100"></div>
+                <div class="py-1">
+                <span
+                  (click)="logout()"
+                  class="cursor-pointer group flex items-center px-4 py-2 text-sm leading-5 font-medium text-red-500 hover:bg-red-50 hover:text-red-600 focus:outline-none"
+                  role="menuitem"
+                >
+                  <hero-icon name="logout" size="1.25rem" class="mr-3"></hero-icon>
+                  Déconnexion
+                </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

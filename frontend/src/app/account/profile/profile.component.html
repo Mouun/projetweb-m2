@@ -1,0 +1,80 @@
+<div class="flex flex-col flex-grow justify-center py-5 md:py-10 px-6 xl:px-0">
+  <!--Top text-->
+  <div class="flex justify-center mb-6">
+    <div class="w-full max-w-6xl">
+      <div class="justify-start">
+        <button appSecondaryButton class="mb-5" [size]="buttonSize.lg" (click)="router.navigateByUrl('account')">
+          <hero-icon name="arrow-left" size="1rem" class="mr-1"></hero-icon>
+          Retour
+        </button>
+      </div>
+      <div class="mb-6">
+        <h1>Données personnelles</h1>
+        <span class="italic text-lg">Modifier les données personnelles</span>
+      </div>
+      <form [formGroup]="profileForm" class="w-full lg:max-w-2xl">
+        <div class="flex flex-col">
+          <div class="flex mb-4">
+            <div class="w-full">
+              <app-custom-input
+                controlName="firstname"
+                label="Prénom"
+                [hasError]="getFormControl('firstname').invalid && !getFormControl('firstname').pristine"
+                class="w-full"
+              >
+              </app-custom-input>
+              <app-custom-input-error *ngIf="getFormControl('firstname').errors?.required && !getFormControl('firstname').pristine">Ce champ est requis</app-custom-input-error>
+              <app-custom-input-error *ngIf="getFormControl('firstname').errors?.minlength && !getFormControl('firstname').pristine">Le prénom doit faire au moins 3 caractères</app-custom-input-error>
+            </div>
+            <div class="w-6 sm:w-12"></div>
+            <div class="w-full">
+              <app-custom-input
+                controlName="lastname"
+                label="Nom"
+                [hasError]="getFormControl('lastname').invalid && !getFormControl('lastname').pristine"
+                class="w-full"
+              >
+              </app-custom-input>
+              <app-custom-input-error *ngIf="getFormControl('lastname').errors?.required && !getFormControl('lastname').pristine">Ce champ est requis</app-custom-input-error>
+              <app-custom-input-error *ngIf="getFormControl('lastname').errors?.minlength && !getFormControl('lastname').pristine">Le nom doit faire au moins 3 caractères</app-custom-input-error>
+            </div>
+          </div>
+          <div class="mb-4">
+            <app-custom-input
+              controlName="address"
+              label="Adresse"
+              [optional]="true"
+              [hasError]="getFormControl('address').invalid && !getFormControl('address').pristine"
+            >
+            </app-custom-input>
+          </div>
+          <div class="mb-4">
+            <app-custom-input
+              controlName="postalCode"
+              label="Code postal"
+              [optional]="true"
+              [hasError]="getFormControl('postalCode').invalid && !getFormControl('postalCode').pristine"
+            >
+            </app-custom-input>
+            <app-custom-input-error
+              *ngIf="getFormControl('postalCode').errors?.maxlength || getFormControl('postalCode').errors?.minlength || getFormControl('postalCode').errors?.pattern && !getFormControl('postalCode').pristine">Le code postal doit être composé de 5 chiffres</app-custom-input-error>
+          </div>
+          <div class="mb-4">
+            <app-custom-input
+              controlName="city"
+              label="Ville"
+              [optional]="true"
+              [hasError]="getFormControl('city').invalid && !getFormControl('city').pristine"
+            >
+            </app-custom-input>
+          </div>
+        </div>
+        <div class="flex flex-col mt-6">
+          <button appBaseButton [size]="buttonSize.lg" [isDisabled]="profileForm.invalid" (click)="updateProfile()">
+            Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
